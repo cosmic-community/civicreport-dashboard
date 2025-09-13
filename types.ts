@@ -13,7 +13,20 @@ export interface CosmicObject {
   thumbnail?: string;
 }
 
-// Issue Report type
+// Citizen Reporter type
+export interface CitizenReporter extends CosmicObject {
+  type: 'citizen-reporters';
+  metadata: {
+    full_name: string;
+    email: string;
+    phone?: string;
+    address?: string;
+    verified_email?: boolean;
+    registration_date?: string;
+  };
+}
+
+// Issue Report type (updated to include citizen reporter)
 export interface IssueReport extends CosmicObject {
   type: 'issue-reports';
   metadata: {
@@ -40,9 +53,11 @@ export interface IssueReport extends CosmicObject {
     assigned_staff?: StaffMember;
     reporter_name?: string;
     reporter_contact?: string;
+    citizen_reporter?: CitizenReporter; // New field for registered citizens
     resolution_notes?: string;
     reported_date?: string;
     resolution_date?: string | null;
+    public_id?: string; // For citizens to track their reports
   };
 }
 
@@ -100,6 +115,22 @@ export interface CosmicResponse<T> {
   skip?: number;
 }
 
+// Form data types
+export interface ReportSubmissionData {
+  title: string;
+  description: string;
+  category_id: string;
+  location_address: string;
+  gps_coordinates?: {
+    lat: number;
+    lng: number;
+  };
+  reporter_name: string;
+  reporter_email: string;
+  reporter_phone?: string;
+  photo_evidence?: File[];
+}
+
 // Type guards
 export function isIssueReport(obj: CosmicObject): obj is IssueReport {
   return obj.type === 'issue-reports';
@@ -115,6 +146,10 @@ export function isStaffMember(obj: CosmicObject): obj is StaffMember {
 
 export function isReportCategory(obj: CosmicObject): obj is ReportCategory {
   return obj.type === 'report-categories';
+}
+
+export function isCitizenReporter(obj: CosmicObject): obj is CitizenReporter {
+  return obj.type === 'citizen-reporters';
 }
 
 // Error helper for Cosmic SDK
