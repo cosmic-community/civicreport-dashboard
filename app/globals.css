@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-white text-gray-900;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+@layer components {
+  .dashboard-card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+  }
+
+  .stat-card {
+    @apply bg-white rounded-lg p-4 border border-gray-200;
+  }
+
+  .priority-urgent {
+    @apply bg-danger-500 text-white;
+  }
+
+  .priority-high {
+    @apply bg-warning-500 text-white;
+  }
+
+  .priority-medium {
+    @apply bg-primary-500 text-white;
+  }
+
+  .priority-low {
+    @apply bg-gray-400 text-white;
+  }
+
+  .status-new {
+    @apply bg-blue-500 text-white;
+  }
+
+  .status-acknowledged {
+    @apply bg-yellow-500 text-white;
+  }
+
+  .status-in-progress {
+    @apply bg-orange-500 text-white;
+  }
+
+  .status-resolved {
+    @apply bg-success-500 text-white;
+  }
+
+  .status-closed {
+    @apply bg-gray-500 text-white;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+}
